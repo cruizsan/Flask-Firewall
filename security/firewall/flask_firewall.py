@@ -10,8 +10,14 @@ class flask_firewall:
         self.request = request
         self.user_groups = user_groups
         self.abort_func = abort_func
-        if self._is_include():
-            if not self._check_routing():
+
+        if self.is_route_defined_in_firewall():
+            if self._is_include():
+                if not self._check_routing():
+                    self.abort_func(403)
+        else:
+            behavior = self.config['flask_firewall']['behavior']
+            if behavior.lower() == 'unauthorized':
                 self.abort_func(403)
 
     def get_group(self, route):
@@ -23,6 +29,22 @@ class flask_firewall:
 
     def get_user_groups(self):
         return self.user_groups
+
+    def is_route_defined_in_firewall(self):
+        all_routes = self.routes
+        routes = []
+        for r in all_routes:
+            routes.append(r['route'])
+
+        all_routes = self.exclude
+        for r2 in all_routes:
+            routes.append(r2)
+
+        route = self._get_request_path()
+        for r in routes:
+            if re.search(r, route):
+                return True
+        return False
 
     def _check_routing(self):
         route = self._get_request_path()
