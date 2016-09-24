@@ -11,7 +11,7 @@ Flask-exemple.py
 ----------------
 Il suffit de prendre le dossier **security** de notre repository github et de l'insérer dans votre applicarion sous Flask.
 
-Dans votre application Flask, il serai judicieux d'éxécuter cette "frontière" d'utilisateur avant que la requête soit complètement gérée.
+Dans votre application Flask, il serai judicieux d'éxécuter cette "frontièe" d'utilisateur avant que la requête soit complètement gerée.
 Nous utilisons ici le décorateur *@app.before_request*.
 
 Vous trouverez un exemple fonctionnel dans ce repository; **flask-example.py**
@@ -31,11 +31,11 @@ Configutation
 -------------
 Le fichier de configuration de notre firewall se trouve dans **security/firewall/flask_firewall.json**
 
-Vous pouvez dans ce fichier de configuration spécifié pour chaque (pattern) de route quel groupe y à accès.
+Vous pouvez dans ce fichier de configuration spécifique pour chaque (pattern) de route quel groupe y à  accède.
 
 Les routes qui sont incluse dans le test et les routes qui ne le sont pas.
 
-Voici un exemple de fihcier de configuration commenté.
+Voici un exemple de fichier de configuration commenté.
 
 ```json
 {
@@ -49,15 +49,15 @@ Voici un exemple de fihcier de configuration commenté.
       "include": # les routes qui sont incluse pour les tests du firewall
       [
         {
-          "route": "^/api/*", # toute les routes qui ont le format /api/xxxx seront testée
-          "groups": ["IS_USER", "IS_ADMIN"] # si utilisateur fait parti du groupe IS_USER ou IS_ADMIN, il peux acceder à cette route
+          "route": "^/api/*", # toute les routes qui ont le format /api/xxxx seront testÃ©e
+          "groups": ["IS_USER", "IS_ADMIN"] # si utilisateur fait parti du groupe IS_USER ou IS_ADMIN, il peux acceder à  cette route
         },
         {
-          "route": "^/anonym/*", # toute les routes qui ont le format /anonym/xxxx seront testée
-          "groups": ["IS_ANONYMOUS"] # si utilisateur fait parti du groupe IS_ANONYMOUS, il peux acceder à cette route
+          "route": "^/anonym/*", # toute les routes qui ont le format /anonym/xxxx seront testÃ©e
+          "groups": ["IS_ANONYMOUS"] # si utilisateur fait parti du groupe IS_ANONYMOUS, il peux acceder à  cette route
         }
       ],
-      "exclude": ["^/static/*"] # cette route ne sera pas testée par le firewall (tout le monde y à accès)
+      "exclude": ["^/static/*"] # cette route ne sera pas testÃ©e par le firewall (tout le monde y a  accedé)
     }
   }
 }
