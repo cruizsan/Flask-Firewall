@@ -57,8 +57,11 @@ Voici un exemple de fichier de configuration commenté.
           "groups": ["IS_ANONYMOUS"] # si utilisateur fait parti du groupe IS_ANONYMOUS, il peux acceder à  cette route
         }
       ],
-      "exclude": ["^/static/*"] # cette route ne sera pas testÃ©e par le firewall (tout le monde y a  accedé)
+      "exclude": ["^/static/*"] # cette route ne sera pas testée par le firewall (tout le monde y a  accedé)
     }
-  }
+  },
+  "behavior": "unauthorized" # quel comportement faire pour les routes non matchée (testée, non existante dans le firewall)
+                                > unauthorized : seront limitée (403)
+                                > authorized : seront libre d'accès
 }
 ```
