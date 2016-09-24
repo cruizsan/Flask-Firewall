@@ -1,0 +1,23 @@
+{
+  "flask_firewall":
+  {
+    "author": "Ruiz Sanchez Carlos",
+    "version": "v1.0",
+    "github": "https://github.com/SushisMakis/Flask-Firewall",
+    "routing":
+    {
+      "include":
+      [
+        {
+          "route": "^/api/*",
+          "groups": ["IS_USER", "IS_ADMIN"]
+        },
+        {
+          "route": "^/anonym/*",
+          "groups": ["IS_ANONYMOUS", "IS_ADMIN"]
+        }
+      ],
+      "exclude": ["^/static/*"]
+    }
+  }
+}
