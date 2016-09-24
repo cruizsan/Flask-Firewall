@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.before_request
 def pre_request():
     # here log my user, get group for this user
-    user_groups = ["IS_ADMIN"]
+    user_groups = ["IS_USER"]
     flask_firewall(request, user_groups, abort)
 
 @app.route('/')
