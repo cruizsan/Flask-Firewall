@@ -65,3 +65,12 @@ Voici un exemple de fichier de configuration commenté.
                                 > authorized : seront libre d'accès
 }
 ```
+
+TIPS
+----
+
+    * Vous pouvez gérer vous même quel rendu/fonction à éxécuter via le gestion d'erreur de Flask
+        * Custom error pages(Flask) : http://flask.pocoo.org/docs/0.11/patterns/errorpages/
+    
+    * Attention à l'ordre dans la création des règles de routing de firewall
+        * Les test s'arrête au premier qu'il match (faire des règles les plus restrictive au moins restrictive)
