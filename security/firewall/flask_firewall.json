@@ -10,11 +10,18 @@
       [
         {
           "route": "^/api/*",
-          "groups": ["IS_USER", "IS_ADMIN"]
+          "groups": ["IS_USER", "IS_ADMIN"],
+          "error_code": 403
         },
         {
           "route": "^/anonym/*",
-          "groups": ["IS_ANONYMOUS", "IS_ADMIN"]
+          "groups": ["IS_ANONYMOUS", "IS_ADMIN"],
+          "error_code": 403
+        },
+        {
+          "route": "^/doc/*",
+          "groups": ["IS_DEV"],
+          "error_code": 403
         }
       ],
       "exclude": ["^/static/*"]

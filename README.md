@@ -50,11 +50,13 @@ Voici un exemple de fichier de configuration commenté.
       [
         {
           "route": "^/api/*", # toute les routes qui ont le format /api/xxxx seront testÃ©e
-          "groups": ["IS_USER", "IS_ADMIN"] # si utilisateur fait parti du groupe IS_USER ou IS_ADMIN, il peux acceder à  cette route
+          "groups": ["IS_USER", "IS_ADMIN"], # si utilisateur fait parti du groupe IS_USER ou IS_ADMIN, il peux acceder à  cette route
+          "error_code": 403 # si il y'a erreur, le code qui sera lancée
         },
         {
           "route": "^/anonym/*", # toute les routes qui ont le format /anonym/xxxx seront testÃ©e
-          "groups": ["IS_ANONYMOUS"] # si utilisateur fait parti du groupe IS_ANONYMOUS, il peux acceder à  cette route
+          "groups": ["IS_ANONYMOUS"], # si utilisateur fait parti du groupe IS_ANONYMOUS, il peux acceder à  cette route
+          "error_code": 400 # si il y'a erreur, le code qui sera lancée
         }
       ],
       "exclude": ["^/static/*"] # cette route ne sera pas testée par le firewall (tout le monde y a  accedé)

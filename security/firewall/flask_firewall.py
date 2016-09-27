@@ -13,8 +13,9 @@ class flask_firewall:
 
         if self.is_route_defined_in_firewall():
             if self._is_include():
-                if not self._check_routing():
-                    self.abort_func(403)
+                error = self._check_routing()
+                if error['error']:
+                    self.abort_func(error['error_code'])
         else:
             behavior = self.config['flask_firewall']['behavior']
             if behavior.lower() == 'unauthorized':
@@ -24,7 +25,7 @@ class flask_firewall:
         for r in self.routes:
             route_regex = r['route']
             if re.search(route_regex, route):
-                return r['groups']
+                return {'groups': r['groups'], 'error': r['error_code']}
         return None
 
     def get_user_groups(self):
@@ -52,6 +53,8 @@ class flask_firewall:
         user_groups_valid = self.user_groups
         if not route_groups_valid:
             return True
+        error_code = route_groups_valid['error']
+        route_groups_valid = route_groups_valid['groups']
         if not isinstance(route_groups_valid, list):
             route_groups_valid = [route_groups_valid]
         if not isinstance(user_groups_valid, list):
@@ -59,8 +62,8 @@ class flask_firewall:
 
         for user_g in user_groups_valid:
             if user_g in route_groups_valid:
-                return True
-        return False
+                return {'error': False, 'error_code': None}
+        return {'error': True, 'error_code': error_code}
 
     def _is_include(self):
         route = self._get_request_path()
