@@ -1,15 +1,17 @@
 import json
 import re
+from flask import abort
+
 
 class flask_firewall:
-    def __init__(self, request, user_groups, abort_func, config='security/firewall/flask_firewall.json'):
+    def __init__(self, request, user_groups, config='security/firewall/flask_firewall.json'):
         with open(config) as json_data:
             self.config = json.load(json_data)
         self.routes = self._get_routes(r_type='include')
         self.exclude = self._get_routes(r_type='exclude')
         self.request = request
         self.user_groups = user_groups
-        self.abort_func = abort_func
+        self.abort_func = abort
 
         if self.is_route_defined_in_firewall():
             if self._is_include():
