@@ -1,6 +1,6 @@
 Flask-Firewall
 ==============
-Permet une gestion d'un firewall pour l'accès a nos ressources/pages de votre application sous Flask.
+Permet une gestion d'un firewall pour l'accès aux ressources/pages de votre application sous Flask.
 
 L'autorisation d'une page ou le refus d'une page dépend de la gestion d'un ou plusieur "groupe" valide.
 
@@ -9,9 +9,9 @@ Utilisation
 
 Flask-exemple.py
 ----------------
-Il suffit de prendre le dossier **security** de notre repository github et de l'insérer dans votre applicarion sous Flask.
+Il suffit de prendre le dossier **security** du repository github et de l'insérer dans votre applicarion sous Flask.
 
-Dans votre application Flask, il serai judicieux d'éxécuter cette "frontièe" d'utilisateur avant que la requête soit complètement gerée.
+Dans votre application Flask, il serai judicieux d'éxécuter ce "hook" avant que la requête soit complètement gerée.
 Nous utilisons ici le décorateur *@app.before_request*.
 
 Vous trouverez un exemple fonctionnel dans ce repository; **flask-example.py**
@@ -22,20 +22,20 @@ Vous trouverez un exemple fonctionnel dans ce repository; **flask-example.py**
   
       # here get my user, get group for this user
       
-      user_groups = ["IS_ADMIN"] # le groupe de notre use, une liste de groupe qu'il fait parti est possible
-      # ici on fait la magie, si utilisateur fait parti d'un groupe non autorisé -> error 403
+      user_groups = ["IS_ADMIN"] # le groupe de notre user, une liste de groupe qu'il fait parti est possible
+      # magic start here, si utilisateur fait parti d'un groupe non autorisé -> error 403
       flask_firewall(request, user_groups, abort)
 ```
 
 Configutation
 -------------
-Le fichier de configuration de notre firewall se trouve dans **security/firewall/flask_firewall.json**
+Le fichier de configuration du firewall se trouve dans **security/firewall/flask_firewall.json**
 
-Vous pouvez dans ce fichier de configuration spécifique pour chaque (pattern) de route quel groupe y à  accède.
+Vous pouvez dans ce fichier de configuration spécifique pour chaque (pattern) route quel groupe y accède.
 
-Les routes qui sont incluse dans le test et les routes qui ne le sont pas.
+Les routes qui sont incluse dans le test ainsi que les routes qui ne le sont pas.
 
-Voici un exemple de fichier de configuration commenté.
+Voici un exemple de fichier de configuration (avec quelque commentaire).
 
 ```json
 {
@@ -43,15 +43,15 @@ Voici un exemple de fichier de configuration commenté.
   {
     "author": "Ruiz Sanchez Carlos",
     "version": "v1.0",
-    "github": "https://github.com/SushisMakis/Flask-Firewall",
-    "routing": # ici que vous devez ajouter/supprimé des configuration
+    "github": "https://github.com/cruizsan/Flask-Firewall",
+    "routing": # ici que vous devez ajouter/supprimer des configurations de routes
     {
-      "include": # les routes qui sont incluse pour les tests du firewall
+      "include": # les routes qui sont incluse dans les tests du firewall
       [
         {
-          "route": "^/api/*", # toute les routes qui ont le format /api/xxxx seront testÃ©e
+          "route": "^/api/*", # toute les routes qui ont le format /api/xxxx seront testée
           "groups": ["IS_USER", "IS_ADMIN"], # si utilisateur fait parti du groupe IS_USER ou IS_ADMIN, il peux acceder à  cette route
-          "error_code": 403 # si il y'a erreur, le code qui sera lancée
+          "error_code": 403 # si il y'a erreur, le code qui sera lancée (== si pas un groupe correct pour cette route)
         },
         {
           "route": "^/anonym/*", # toute les routes qui ont le format /anonym/xxxx seront testÃ©e
@@ -59,10 +59,10 @@ Voici un exemple de fichier de configuration commenté.
           "error_code": 400 # si il y'a erreur, le code qui sera lancée
         }
       ],
-      "exclude": ["^/static/*"] # cette route ne sera pas testée par le firewall (tout le monde y a  accedé)
+      "exclude": ["^/static/*"] # cette route ne sera pas testée par le firewall (libre d'accès)
     }
   },
-  "behavior": "unauthorized" # quel comportement faire pour les routes non matchée (testée, non existante dans le firewall)
+  "behavior": "unauthorized" # quel comportement faire pour les routes non matchée (non existante dans le firewall)
                                 > unauthorized : seront limitée (403)
                                 > authorized : seront libre d'accès
 }
