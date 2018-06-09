@@ -3,7 +3,7 @@
   {
     "author": "Ruiz Sanchez Carlos",
     "version": "v1.0",
-    "github": "https://github.com/SushisMakis/Flask-Firewall",
+    "github": "https://github.com/cruizsan/Flask-Firewall",
     "routing":
     {
       "include":

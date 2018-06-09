@@ -84,7 +84,7 @@ class flask_firewall:
             routes_config = self.config['flask_firewall']['routing'][r_type]
             if not isinstance(routes_config, list):
                 routes_config = [routes_config]
-        except Exception, e:
+        except Exception as e:
             print("ERROR flask_firewall._get_routes >>>>")
             print(e)
             print("<<<< ERROR flask_firewall._get_routes")
